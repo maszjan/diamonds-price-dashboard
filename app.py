@@ -36,7 +36,7 @@ st.markdown(
         --negative: #A23B44;
     }
 
-    html, body, [class*="css"] { font-family: 'Inter', sans-serif; color: var(--text-primary); }
+    html, body, [class*="css"] { font-family: 'Inter', sans-serif; color: var(--text-primary); color-scheme: light; }
     .stApp { background: var(--bg); }
     section[data-testid="stSidebar"] { display: none; }
     footer { visibility: hidden; }
@@ -52,6 +52,31 @@ st.markdown(
         color: var(--text-secondary) !important;
         opacity: 1 !important;
     }
+    [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] p {
+        color: var(--text-secondary) !important;
+        opacity: 1 !important;
+    }
+
+    div[data-testid="stMetricLabel"], div[data-testid="stMetricLabel"] * {
+        color: var(--text-secondary) !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: var(--text-secondary) !important;
+    }
+    div[data-testid="stMetricValue"], div[data-testid="stMetricValue"] * {
+        color: var(--text-primary) !important;
+        opacity: 1 !important;
+    }
+    div[data-testid="stMarkdownContainer"] p,
+    div[data-testid="stMarkdownContainer"] li,
+    label, .stRadio label, .stSlider label, .stSelectSlider label, .stTextInput label {
+        color: var(--text-primary) !important;
+        opacity: 1 !important;
+    }
+    div[data-testid="stWidgetLabel"] p {
+        color: var(--text-primary) !important;
+        opacity: 1 !important;
+    }
+    .stDataFrame, .stDataFrame * { color: var(--text-primary) !important; }
 
     .dv-hero {
         background: var(--bg-elevated);
@@ -273,7 +298,7 @@ def explain(text):
 
 
 def glossary(title, items):
-    rows = "".join(f"<p><dt>{k}</dt> — <dd>{v}</dd></p>" for k, v in items)
+    rows = "".join(f"<p><dt>{k}</dt> - <dd>{v}</dd></p>" for k, v in items)
     st.markdown(
         f"<div class='dv-glossary'><div class='dv-glossary-title'>{title}</div>{rows}</div>",
         unsafe_allow_html=True,
@@ -283,7 +308,7 @@ st.markdown(
     """
     <div class="dv-hero">
         <div class="dv-hero-title">Analityka cen diamentów na podstawie ich jakości, wagi oraz wymiarów</div>
-        <p class="dv-hero-tag">Pełny potok przetwarzania danych — od surowego zbioru rynkowego, przez jego
+        <p class="dv-hero-tag">Pełny potok przetwarzania danych - od surowego zbioru rynkowego, przez jego
         diagnozę i naprawę, redukcję wymiarowości i detekcję anomalii cenowych, po model wyceniający
         i interaktywny kalkulator.</p>
     </div>
@@ -295,13 +320,12 @@ with st.container(border=True):
     section("01", "Cel i źródło danych")
     story(
         "Celem analizy jest sprawdzenie, na ile cena diamentu daje się wyjaśnić jego mierzalnymi "
-        "cechami — wagą, szlifem, kolorem, czystością i wymiarami fizycznymi — oraz zbudowanie na tej "
+        "cechami - wagą, szlifem, kolorem, czystością i wymiarami fizycznymi - oraz zbudowanie na tej "
         "podstawie modelu wyceniającego."
     )
     story(
         "Źródłem jest prawdziwy, publicznie dostępny zbiór danych rynkowych o diamentach (biblioteka "
-        "ggplot2/tidyverse, 53 940 rekordów). Żadna kolumna, wartość ani wiersz nie zostały dodane, "
-        "wygenerowane losowo ani sztucznie zmodyfikowane — wszystkie dane pochodzą z oryginalnego pliku."
+        "ggplot2/tidyverse)."
     )
     c1, c2, c3 = st.columns(3)
     c1.metric("Diamentów w zbiorze", f"{eda['n_rows']:,}".replace(",", " "))
@@ -311,9 +335,7 @@ with st.container(border=True):
 
 st.write("")
 
-# ========================================================================
-# 2. ZBIOR DANYCH
-# ========================================================================
+
 with st.container(border=True):
     section("02", "Zbiór danych")
     story(
@@ -325,7 +347,7 @@ with st.container(border=True):
     c3.metric("Przewartościowane", f"{eda['n_overpriced']:,}".replace(",", " "))
     c4.metric("Niedowartościowane (okazje)", f"{eda['n_undervalued']:,}".replace(",", " "))
     explain(
-        f"Korelacja wagi (carat) z ceną wynosi **{eda['corr_price_carat']:.3f}** — silna, realna "
+        f"Korelacja wagi (carat) z ceną wynosi **{eda['corr_price_carat']:.3f}** - silna, realna "
         "zależność rynkowa, nie losowy szum."
     )
 
@@ -333,9 +355,9 @@ with st.container(border=True):
         "Słowniczek pojęć",
         [
             ("Carat (waga)", "jednostka masy kamieni szlachetnych. 1 karat = 0,2 grama = 200 miligramów."),
-            ("Table", "największa, płaska faseta na szczycie oszlifowanego diamentu. Wartość w danych to procent — stosunek szerokości tej fasety do całkowitej średnicy kamienia."),
+            ("Table", "największa, płaska faseta na szczycie oszlifowanego diamentu. Wartość w danych to procent - stosunek szerokości tej fasety do całkowitej średnicy kamienia."),
             ("Depth (głębokość)", "wysokość diamentu (od fasety table do najniższego punktu) wyrażona jako procent średniej średnicy kamienia."),
-            ("x, y, z", "wymiary fizyczne diamentu w milimetrach — długość, szerokość i wysokość."),
+            ("x, y, z", "wymiary fizyczne diamentu w milimetrach - długość, szerokość i wysokość."),
         ],
     )
 
@@ -364,7 +386,7 @@ st.write("")
 with st.container(border=True):
     section("03", "Czyszczenie i integracja")
     story(
-        "Zbiór źródłowy nie zawiera braków danych ani niespójnych formatów zapisu — kategorie są "
+        "Zbiór źródłowy nie zawiera braków danych ani niespójnych formatów zapisu - kategorie są "
         "zapisane spójnie od początku. Dokładniejsza analiza ujawnia jednak trzy problemy, które są "
         "naturalnie obecne w oryginalnym pliku."
     )
@@ -374,19 +396,19 @@ with st.container(border=True):
     c3.metric("Niespójność pomiaru głębokości", eda["n_inconsistent_measurement_rows"])
     cc1, cc2, cc3 = st.columns(3)
     cc1.markdown("<div class='dv-explain'>Identyczne rekordy we wszystkich kolumnach.</div>", unsafe_allow_html=True)
-    cc2.markdown("<div class='dv-explain'>Wymiar x, y lub z równy zero jest fizycznie niemożliwy — diament nie może mieć zerowej długości.</div>", unsafe_allow_html=True)
-    cc3.markdown("<div class='dv-explain'>Podana głębokość nie zgadza się z przeliczoną z x/y/z o ponad 5 punktów procentowych — ślad błędu transkrypcji, np. przestawionego przecinka.</div>", unsafe_allow_html=True)
+    cc2.markdown("<div class='dv-explain'>Wymiar x, y lub z równy zero jest fizycznie niemożliwy - diament nie może mieć zerowej długości.</div>", unsafe_allow_html=True)
+    cc3.markdown("<div class='dv-explain'>Podana głębokość nie zgadza się z przeliczoną z x/y/z o ponad 5 punktów procentowych - ślad błędu transkrypcji, np. przestawionego przecinka.</div>", unsafe_allow_html=True)
     st.divider()
     story(
         "Wszystkie trzy problemy potraktowano jako brakujące dane i uzupełniono medianą liczoną w "
-        "obrębie tego samego szlifu (cut) — różne szlify mają różne typowe proporcje geometryczne, "
+        "obrębie tego samego szlifu (cut) - różne szlify mają różne typowe proporcje geometryczne, "
         "więc mediana grupowa jest trafniejsza niż globalna. Mediana ta została policzona wyłącznie na "
         "zbiorze treningowym, aby uniknąć wycieku informacji ze zbioru testowego."
     )
 
     st.markdown("**Integracja: cena diamentu na tle jego grupy jakościowej**")
     explain(
-        "Tabele podsumowujące (średnia cena wg czystości i wg koloru) są dołączane do tabeli głównej — "
+        "Tabele podsumowujące (średnia cena wg czystości i wg koloru) są dołączane do tabeli głównej - "
         "powstają cechy pokazujące odchylenie ceny konkretnego diamentu od średniej dla jego grupy."
     )
     col_l, col_r = st.columns(2)
@@ -402,7 +424,7 @@ with st.container(border=True):
     st.divider()
     st.markdown("**Normalizacja: wspólna skala dla modelu**")
     story(
-        "Waga diamentu mieści się w przedziale 0,2–5,0 karata, a table w przedziale 43–95% — dla "
+        "Waga diamentu mieści się w przedziale 0,2–5,0 karata, a table w przedziale 43–95% - dla "
         "modelu to dwie zupełnie różne skale. RobustScaler (mediana i rozstęp międzykwartylowy) "
         "sprowadza je do porównywalnego zakresu, zachowując odporność na wartości odstające. Parametry "
         "skalowania, podobnie jak przy imputacji, pochodzą wyłącznie ze zbioru treningowego."
@@ -421,7 +443,7 @@ with st.container(border=True):
         fig.add_trace(go.Histogram(x=table_scaled, name="table", opacity=0.65, marker_color=GOLD))
         fig.update_layout(barmode="overlay")
     st.plotly_chart(style_fig(fig), use_container_width=True)
-    explain("Przypomnienie: carat to waga (1 ct = 0,2 g), table to procentowa szerokość górnej fasety względem średnicy kamienia — patrz słowniczek w sekcji 02.")
+    explain("Przypomnienie: carat to waga (1 ct = 0,2 g), table to procentowa szerokość górnej fasety względem średnicy kamienia - patrz słowniczek w sekcji 02.")
 
 st.write("")
 
@@ -430,7 +452,7 @@ with st.container(border=True):
     story(
         "Skoro waga silnie determinuje cenę, prosty model bazowy cena ≈ a × carat^b (model potęgowy, "
         "standardowy w wycenie diamentów i z definicji zawsze dodatni) pozwala wskazać diamenty, "
-        "których rzeczywista cena istotnie odbiega od tego, co przewiduje sama waga — przepłacone albo "
+        "których rzeczywista cena istotnie odbiega od tego, co przewiduje sama waga - przepłacone albo "
         "okazje."
     )
     col_l, col_r = st.columns(2)
@@ -473,7 +495,7 @@ with st.container(border=True):
         color_discrete_map={"Przewartościowany": NEGATIVE, "Cena rynkowa": ACCENT},
         opacity=0.45, labels={"carat": "carat", "price": "price"}, render_mode="svg",
     )
-    st.plotly_chart(style_fig(fig, "Waga a cena — anomalie na żywo"), use_container_width=True)
+    st.plotly_chart(style_fig(fig, "Waga a cena - anomalie na żywo"), use_container_width=True)
 
     c1, c2 = st.columns(2)
     c1.metric("Diamentów powyżej progu", int(df_sample["is_over_live"].sum()))
@@ -488,12 +510,12 @@ with st.container(border=True):
     section("05", "Redukcja wymiarowości: PCA i t-SNE")
     story(
         "Model korzysta z 13 cech wejściowych, jednak część z nich mierzy w praktyce tę samą "
-        "własność — wagę, wymiary fizyczne i objętość diamentu determinuje głównie jego fizyczny "
+        "własność - wagę, wymiary fizyczne i objętość diamentu determinuje głównie jego fizyczny "
         "rozmiar. PCA pozwala to policzyć wprost."
     )
     explain(
         f"Do zachowania 90% wariancji wystarczają **{eda['pca_n_components_90pct']}** komponenty "
-        f"z {eda['n_cols_final']} cech — silny sygnał, że część informacji się powtarza."
+        f"z {eda['n_cols_final']} cech - silny sygnał, że część informacji się powtarza."
     )
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=pca_scree["n_components"], y=pca_scree["cumulative_variance"],
@@ -527,7 +549,7 @@ with st.container(border=True):
     story(
         "Random Forest Regressor przewiduje logarytm ceny na podstawie wagi, szlifu, koloru, "
         "czystości i wymiarów fizycznych diamentu. Cechy będące pochodnymi samej ceny są świadomie "
-        "wykluczone — ich użycie pozwoliłoby modelowi podejrzeć odpowiedź zamiast się jej nauczyć."
+        "wykluczone - ich użycie pozwoliłoby modelowi podejrzeć odpowiedź zamiast się jej nauczyć."
     )
     c1, c2, c3 = st.columns(3)
     c1.metric("R²", f"{model_metrics['r2']:.4f}")
@@ -536,7 +558,7 @@ with st.container(border=True):
     st.divider()
     explain(
         "Zbiór podzielono na 80% danych treningowych i 20% testowych. Model uczy się wyłącznie na "
-        "części treningowej, a wszystkie metryki powyżej są liczone na części testowej — danych, "
+        "części treningowej, a wszystkie metryki powyżej są liczone na części testowej - danych, "
         "których model nigdy nie widział podczas treningu."
     )
 
@@ -583,7 +605,7 @@ with st.container(border=True):
             with st.container(border=True):
                 c1, c2, c3 = st.columns([3, 1, 1])
                 with c1:
-                    st.markdown(f"**#{row['diamond_id']}** — {row['cut']}, {row['color']}/{row['clarity']}")
+                    st.markdown(f"**#{row['diamond_id']}** - {row['cut']}, {row['color']}/{row['clarity']}")
                     st.markdown(badge, unsafe_allow_html=True)
                 with c2:
                     st.metric("Carat", f"{row['carat']:.2f}")
@@ -612,8 +634,8 @@ with st.container(border=True):
         carat = st.slider("Waga (carat)", min_value=float(round(calc_defaults["carat_min"], 1)),
                            max_value=float(round(calc_defaults["carat_max"], 1)), value=1.0, step=0.01)
         cut = st.select_slider("Szlif (cut)", options=CUT_ORDER, value="Ideal")
-        color = st.select_slider("Kolor — D to bezbarwny, J to najsłabszy", options=COLOR_ORDER, value="G")
-        clarity = st.select_slider("Czystość — IF to najlepsza, I1 to najsłabsza", options=CLARITY_ORDER, value="VS1")
+        color = st.select_slider("Kolor - D to bezbarwny, J to najsłabszy", options=COLOR_ORDER, value="G")
+        clarity = st.select_slider("Czystość - IF to najlepsza, I1 to najsłabsza", options=CLARITY_ORDER, value="VS1")
 
     def scale_val(col_name, val):
         p = scale_params[col_name]
@@ -668,7 +690,7 @@ with st.container(border=True):
                 f"<div class='dv-explain' style='margin-top:0.3rem;'>"
                 f"<span style='color:{delta_color}; font-weight:700;'>"
                 f"{'+' if delta_vs_baseline >= 0 else ''}{delta_vs_baseline:,.0f} $</span> "
-                f"— różnica względem modelu bazowego opartego tylko o wagę</div>",
+                f"- różnica względem modelu bazowego opartego tylko o wagę</div>",
                 unsafe_allow_html=True,
             )
 
@@ -689,7 +711,7 @@ st.markdown(
     <div class="dv-footer">
         <div class="dv-footer-brand">Analityka cen diamentów</div>
         <div class="dv-footer-meta">
-            Źródło danych: prawdziwy, publiczny zbiór diamonds (ggplot2/tidyverse) — bez żadnych fabrykowanych kolumn ani wartości.
+            Źródło danych: prawdziwy, publiczny zbiór diamonds (ggplot2/tidyverse)
             <a href="https://github.com/tidyverse/ggplot2/blob/main/data-raw/diamonds.csv" target="_blank">Zobacz źródło danych</a>
             &nbsp;\u2022&nbsp; Streamlit + Plotly
         </div>
