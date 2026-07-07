@@ -1,0 +1,94 @@
+{
+  "carat": {
+    "center": 0.7,
+    "scale": 0.64
+  },
+  "depth": {
+    "center": 61.8,
+    "scale": 1.5
+  },
+  "table": {
+    "center": 57.0,
+    "scale": 3.0
+  },
+  "price": {
+    "center": 2399.0,
+    "scale": 4405.0
+  },
+  "x": {
+    "center": 5.69,
+    "scale": 1.83
+  },
+  "y": {
+    "center": 5.71,
+    "scale": 1.8200000000000003
+  },
+  "z": {
+    "center": 3.52,
+    "scale": 1.13
+  },
+  "clarity_avg_price": {
+    "center": 3935.5100855745723,
+    "scale": 176.45461011377074
+  },
+  "color_avg_price": {
+    "center": 4027.8788412820795,
+    "scale": 1351.1371934844942
+  },
+  "delta_price_vs_clarity": {
+    "center": -1435.0632312671146,
+    "scale": 4022.0001520534374
+  },
+  "delta_price_vs_color": {
+    "center": -1385.1771831735891,
+    "scale": 4019.5149594796962
+  },
+  "price_baseline_pred": {
+    "center": 2566.9609598025972,
+    "scale": 3980.982133799759
+  },
+  "price_residual": {
+    "center": -9.354128077304722,
+    "scale": 632.3331145297064
+  },
+  "price_residual_pct": {
+    "center": -0.006011773006428303,
+    "scale": 0.33688207151151783
+  },
+  "volume": {
+    "center": 114.72548700000002,
+    "scale": 106.00863999999999
+  },
+  "price_per_carat": {
+    "center": 3494.0,
+    "scale": 2482.157894736842
+  },
+  "depth_calculated": {
+    "center": 61.83908045977012,
+    "scale": 1.4790666675835809
+  },
+  "depth_mismatch": {
+    "center": 0.026652452025579976,
+    "scale": 0.02714342888767618
+  },
+  "log_price": {
+    "center": 7.783224016336037,
+    "scale": 1.7275943610895954
+  },
+  "log_carat": {
+    "center": 0.5306282510621704,
+    "scale": 0.3764775712349121
+  },
+  "cut_encoded": {
+    "center": 3.0,
+    "scale": 2.0
+  },
+  "color_encoded": {
+    "center": 3.0,
+    "scale": 3.0
+  },
+  "clarity_encoded": {
+    "center": 3.0,
+    "scale": 2.0
+  }
+}

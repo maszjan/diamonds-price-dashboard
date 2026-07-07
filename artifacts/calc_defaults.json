@@ -1,0 +1,14 @@
+{
+  "depth_median": 61.8,
+  "table_median": 57.0,
+  "carat_min": 0.2,
+  "carat_max": 2.31,
+  "baseline_log_b0": 8.44851068720117,
+  "baseline_log_b1": 1.6766883267241715,
+  "x_by_carat_slope": 2.3045814520383314,
+  "x_by_carat_intercept": 3.8916260871570434,
+  "y_by_carat_slope": 2.2857903480459068,
+  "y_by_carat_intercept": 3.9084259009685915,
+  "z_by_carat_slope": 1.4217299432212995,
+  "z_by_carat_intercept": 2.4043359352647493
+}

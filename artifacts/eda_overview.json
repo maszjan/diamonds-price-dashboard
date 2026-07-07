@@ -1,0 +1,23 @@
+{
+  "n_rows_raw": 53940,
+  "n_duplicates_removed": 146,
+  "n_rows": 53794,
+  "n_cols_final": 13,
+  "n_zero_dimension_rows": 19,
+  "n_inconsistent_measurement_rows": 27,
+  "n_overpriced": 1366,
+  "n_undervalued": 23,
+  "missing_after_masking": {
+    "x": 46,
+    "y": 46,
+    "z": 46
+  },
+  "missing_after_imputation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "pca_n_components_90pct": 4,
+  "baseline_r2_carat_only": 0.8282918284456882,
+  "corr_price_carat": 0.9215483214030162
+}
