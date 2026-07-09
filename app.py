@@ -23,21 +23,21 @@ st.markdown(
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
 
     :root {
-        --bg: #F7F8FA;
-        --bg-elevated: #FFFFFF;
-        --card-bg: #FFFFFF;
-        --card-border: rgba(30, 40, 70, 0.10);
-        --text-primary: #1B2130;
-        --text-secondary: #666F84;
-        --accent: #33618A;
-        --accent-2: #6A5A9E;
-        --accent-gold: #92702F;
-        --positive: #2F7A4E;
-        --negative: #A23B44;
+        -bg: #F7F8FA;
+        -bg-elevated: #FFFFFF;
+        -card-bg: #FFFFFF;
+        -card-border: rgba(30, 40, 70, 0.10);
+        -text-primary: #1B2130;
+        -text-secondary: #666F84;
+        -accent: #33618A;
+        -accent-2: #6A5A9E;
+        -accent-gold: #92702F;
+        -positive: #2F7A4E;
+        -negative: #A23B44;
     }
 
-    html, body, [class*="css"] { font-family: 'Inter', sans-serif; color: var(--text-primary); color-scheme: light; }
-    .stApp { background: var(--bg); }
+    html, body, [class*="css"] { font-family: 'Inter', sans-serif; color: var(-text-primary); color-scheme: light; }
+    .stApp { background: var(-bg); }
     section[data-testid="stSidebar"] { display: none; }
     footer { visibility: hidden; }
     #MainMenu { visibility: hidden; }
@@ -49,39 +49,40 @@ st.markdown(
     a[href*="github.com/streamlit"] { display: none !important; }
 
     [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] p {
-        color: var(--text-secondary) !important;
-        opacity: 1 !important;
-    }
-    [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] p {
-        color: var(--text-secondary) !important;
+        color: var(-text-secondary) !important;
         opacity: 1 !important;
     }
 
+    /* Wymuszenie jasnego kontrastu na WSZYSTKICH natywnych etykietach Streamlit -
+       zabezpieczenie na wypadek, gdyby przegladarka odwiedzajacego zglaszala
+       preferencje ciemnego motywu systemowego, ktora Streamlit moglby probowac
+       zastosowac do wewnetrznych elementow (etykiety, opisy) niezaleznie od
+       naszych zmiennych CSS powyzej. */
     div[data-testid="stMetricLabel"], div[data-testid="stMetricLabel"] * {
-        color: var(--text-secondary) !important;
+        color: var(-text-secondary) !important;
         opacity: 1 !important;
-        -webkit-text-fill-color: var(--text-secondary) !important;
+        -webkit-text-fill-color: var(-text-secondary) !important;
     }
     div[data-testid="stMetricValue"], div[data-testid="stMetricValue"] * {
-        color: var(--text-primary) !important;
+        color: var(-text-primary) !important;
         opacity: 1 !important;
     }
     div[data-testid="stMarkdownContainer"] p,
     div[data-testid="stMarkdownContainer"] li,
     label, .stRadio label, .stSlider label, .stSelectSlider label, .stTextInput label {
-        color: var(--text-primary) !important;
+        color: var(-text-primary) !important;
         opacity: 1 !important;
     }
     div[data-testid="stWidgetLabel"] p {
-        color: var(--text-primary) !important;
+        color: var(-text-primary) !important;
         opacity: 1 !important;
     }
-    .stDataFrame, .stDataFrame * { color: var(--text-primary) !important; }
+    .stDataFrame, .stDataFrame * { color: var(-text-primary) !important; }
 
     .dv-hero {
-        background: var(--bg-elevated);
-        border: 1px solid var(--card-border);
-        border-left: 3px solid var(--accent-gold);
+        background: var(-bg-elevated);
+        border: 1px solid var(-card-border);
+        border-left: 3px solid var(-accent-gold);
         border-radius: 4px;
         padding: 1.7rem 2.1rem;
         margin-bottom: 1.3rem;
@@ -90,13 +91,13 @@ st.markdown(
         font-family: 'Playfair Display', serif;
         font-weight: 700;
         font-size: 1.85rem;
-        color: var(--text-primary);
+        color: var(-text-primary);
         margin: 0;
         line-height: 1.25;
     }
     .dv-hero-tag {
         font-size: 0.96rem;
-        color: var(--text-secondary);
+        color: var(-text-secondary);
         margin: 0.55rem 0 0 0;
         max-width: 760px;
         line-height: 1.55;
@@ -105,30 +106,30 @@ st.markdown(
     .stButton button { border-radius: 3px !important; }
 
     div[data-testid="stMetric"] {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
+        background: var(-card-bg);
+        border: 1px solid var(-card-border);
         border-radius: 4px;
         padding: 0.85rem 1rem 0.65rem 1rem;
     }
-    div[data-testid="stMetricLabel"] { font-weight: 500; color: var(--text-secondary) !important; font-size: 0.82rem !important; }
+    div[data-testid="stMetricLabel"] { font-weight: 500; color: var(-text-secondary) !important; font-size: 0.82rem !important; }
     div[data-testid="stMetricValue"] {
         font-weight: 700;
         font-family: 'Playfair Display', serif;
-        color: var(--text-primary);
+        color: var(-text-primary);
     }
 
     div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="stVerticalBlock"] {
-        background: var(--card-bg);
+        background: var(-card-bg);
     }
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        border-color: var(--card-border) !important;
+        border-color: var(-card-border) !important;
         border-radius: 4px !important;
-        background: var(--card-bg);
+        background: var(-card-bg);
     }
 
     .dv-section-num {
         display: inline-block;
-        color: var(--accent-gold);
+        color: var(-accent-gold);
         font-family: 'Playfair Display', serif;
         font-weight: 700;
         font-size: 0.85rem;
@@ -139,16 +140,16 @@ st.markdown(
         font-family: 'Playfair Display', serif;
         font-weight: 700;
         font-size: 1.3rem;
-        color: var(--text-primary);
+        color: var(-text-primary);
         margin-bottom: 0.35rem;
     }
     .dv-story {
-        color: var(--text-primary);
+        color: var(-text-primary);
         font-size: 0.98rem;
         line-height: 1.65;
         margin-bottom: 0.9rem;
     }
-    .dv-explain { color: var(--text-secondary); font-size: 0.89rem; line-height: 1.55; margin-bottom: 0.6rem; }
+    .dv-explain { color: var(-text-secondary); font-size: 0.89rem; line-height: 1.55; margin-bottom: 0.6rem; }
 
     .dv-glossary {
         background: rgba(146,112,47,0.06);
@@ -160,32 +161,32 @@ st.markdown(
     .dv-glossary-title {
         font-weight: 700;
         font-size: 0.85rem;
-        color: var(--accent-gold);
+        color: var(-accent-gold);
         text-transform: uppercase;
         letter-spacing: 0.4px;
         margin-bottom: 0.4rem;
     }
-    .dv-glossary dt { font-weight: 700; color: var(--text-primary); display: inline; }
-    .dv-glossary dd { display: inline; margin: 0; color: var(--text-secondary); }
+    .dv-glossary dt { font-weight: 700; color: var(-text-primary); display: inline; }
+    .dv-glossary dd { display: inline; margin: 0; color: var(-text-secondary); }
     .dv-glossary p { margin: 0.25rem 0; font-size: 0.88rem; line-height: 1.5; }
 
     .badge {
         padding: 3px 12px; border-radius: 3px; font-weight: 600; font-size: 0.74rem;
         display: inline-block; letter-spacing: 0.2px;
     }
-    .badge-over { background: rgba(162,59,68,0.12); color: var(--negative); border: 1px solid rgba(162,59,68,0.3); }
-    .badge-under { background: rgba(47,122,78,0.12); color: var(--positive); border: 1px solid rgba(47,122,78,0.3); }
-    .badge-normal { background: rgba(100,110,140,0.10); color: var(--text-secondary); border: 1px solid var(--card-border); }
+    .badge-over { background: rgba(162,59,68,0.12); color: var(-negative); border: 1px solid rgba(162,59,68,0.3); }
+    .badge-under { background: rgba(47,122,78,0.12); color: var(-positive); border: 1px solid rgba(47,122,78,0.3); }
+    .badge-normal { background: rgba(100,110,140,0.10); color: var(-text-secondary); border: 1px solid var(-card-border); }
 
     .dv-price-value {
         font-family: 'Playfair Display', serif;
         font-weight: 700;
         font-size: 2.7rem;
-        color: var(--accent-gold);
+        color: var(-accent-gold);
         margin: 0.2rem 0;
     }
     .dv-price-label {
-        color: var(--text-secondary);
+        color: var(-text-secondary);
         font-weight: 600;
         letter-spacing: 0.6px;
         text-transform: uppercase;
@@ -193,7 +194,7 @@ st.markdown(
     }
 
     .dv-footer {
-        border-top: 1px solid var(--card-border);
+        border-top: 1px solid var(-card-border);
         margin-top: 2rem;
         padding: 1.2rem 0 0.4rem 0;
         display: flex;
@@ -205,11 +206,11 @@ st.markdown(
     .dv-footer-brand {
         font-family: 'Playfair Display', serif;
         font-weight: 700;
-        color: var(--text-primary);
+        color: var(-text-primary);
         font-size: 0.95rem;
     }
-    .dv-footer-meta { color: var(--text-secondary); font-size: 0.82rem; }
-    .dv-footer-meta a { color: var(--accent-gold); text-decoration: none; }
+    .dv-footer-meta { color: var(-text-secondary); font-size: 0.82rem; }
+    .dv-footer-meta a { color: var(-accent-gold); text-decoration: none; }
     .dv-footer-meta a:hover { text-decoration: underline; }
 
     @media (max-width: 640px) {
@@ -263,7 +264,7 @@ ACCENT2 = "#6A5A9E"
 GOLD = "#92702F"
 NEGATIVE = "#A23B44"
 TEXT_SEC = "#666F84"
-PLOT_BG = "rgba(0,0,0,0)"
+PLOT_BG = "#FFFFFF"
 FONT_COLOR = "#1B2130"
 GRID_COLOR = "rgba(30,40,70,0.09)"
 
@@ -304,6 +305,7 @@ def glossary(title, items):
         unsafe_allow_html=True,
     )
 
+
 st.markdown(
     """
     <div class="dv-hero">
@@ -334,7 +336,6 @@ with st.container(border=True):
     st.caption("Źródło danych: [github.com/tidyverse/ggplot2](https://github.com/tidyverse/ggplot2/blob/main/data-raw/diamonds.csv)")
 
 st.write("")
-
 
 with st.container(border=True):
     section("02", "Zbiór danych")
@@ -432,15 +433,15 @@ with st.container(border=True):
     choice = st.radio("Widok:", ["Przed normalizacją", "Po normalizacji"], horizontal=True)
     if choice == "Przed normalizacją":
         fig = go.Figure()
-        fig.add_trace(go.Histogram(x=df_sample["carat"], name="carat", opacity=0.65, marker_color=ACCENT))
-        fig.add_trace(go.Histogram(x=df_sample["table"], name="table", opacity=0.65, marker_color=GOLD))
+        fig.add_trace(go.Histogram(x=df_sample["carat"], name="carat", opacity=0.8, marker_color=ACCENT))
+        fig.add_trace(go.Histogram(x=df_sample["table"], name="table", opacity=0.8, marker_color=GOLD))
         fig.update_layout(barmode="overlay")
     else:
         carat_scaled = (df_sample["carat"] - scale_params["carat"]["center"]) / scale_params["carat"]["scale"]
         table_scaled = (df_sample["table"] - scale_params["table"]["center"]) / scale_params["table"]["scale"]
         fig = go.Figure()
-        fig.add_trace(go.Histogram(x=carat_scaled, name="carat", opacity=0.65, marker_color=ACCENT))
-        fig.add_trace(go.Histogram(x=table_scaled, name="table", opacity=0.65, marker_color=GOLD))
+        fig.add_trace(go.Histogram(x=carat_scaled, name="carat", opacity=0.8, marker_color=ACCENT))
+        fig.add_trace(go.Histogram(x=table_scaled, name="table", opacity=0.8, marker_color=GOLD))
         fig.update_layout(barmode="overlay")
     st.plotly_chart(style_fig(fig), use_container_width=True)
     explain("Przypomnienie: carat to waga (1 ct = 0,2 g), table to procentowa szerokość górnej fasety względem średnicy kamienia - patrz słowniczek w sekcji 02.")
@@ -493,7 +494,7 @@ with st.container(border=True):
         df_sample, x="carat", y="price",
         color=df_sample["is_over_live"].map({True: "Przewartościowany", False: "Cena rynkowa"}),
         color_discrete_map={"Przewartościowany": NEGATIVE, "Cena rynkowa": ACCENT},
-        opacity=0.45, labels={"carat": "carat", "price": "price"}, render_mode="svg",
+        opacity=0.65, labels={"carat": "carat", "price": "price"}, render_mode="svg",
     )
     st.plotly_chart(style_fig(fig, "Waga a cena - anomalie na żywo"), use_container_width=True)
 
@@ -504,7 +505,6 @@ with st.container(border=True):
     c2.metric("Średnia nadpłata", f"${avg_overpay:,.0f}")
 
 st.write("")
-
 
 with st.container(border=True):
     section("05", "Redukcja wymiarowości: PCA i t-SNE")
@@ -530,19 +530,18 @@ with st.container(border=True):
     col_l, col_r = st.columns(2)
     with col_l:
         st.markdown("**Rzut PCA (liniowy)**")
-        fig = px.scatter(pca_2d, x="PC1", y="PC2", color=color_by, opacity=0.5, render_mode="svg",
+        fig = px.scatter(pca_2d, x="PC1", y="PC2", color=color_by, opacity=0.7, render_mode="svg",
                           category_orders={"cut": CUT_ORDER, "color": COLOR_ORDER},
                           color_discrete_sequence=px.colors.sequential.Tealgrn if color_by == "cut" else px.colors.sequential.Purp)
         st.plotly_chart(style_fig(fig), use_container_width=True)
     with col_r:
         st.markdown("**Rzut t-SNE (nieliniowy)**")
-        fig = px.scatter(tsne_2d, x="TSNE1", y="TSNE2", color=color_by, opacity=0.5, render_mode="svg",
+        fig = px.scatter(tsne_2d, x="TSNE1", y="TSNE2", color=color_by, opacity=0.7, render_mode="svg",
                           category_orders={"cut": CUT_ORDER, "color": COLOR_ORDER},
                           color_discrete_sequence=px.colors.sequential.Tealgrn if color_by == "cut" else px.colors.sequential.Purp)
         st.plotly_chart(style_fig(fig), use_container_width=True)
 
 st.write("")
-
 
 with st.container(border=True):
     section("06", "Model predykcyjny")
@@ -573,7 +572,7 @@ with st.container(border=True):
     with col_l:
         st.markdown("**Rzeczywiste a przewidywane wartości**")
         explain("Każdy punkt to jeden diament ze zbioru testowego. Im bliżej przerywanej linii, tym trafniejsza predykcja.")
-        fig = px.scatter(predictions, x="y_true", y="y_pred", opacity=0.25, render_mode="svg",
+        fig = px.scatter(predictions, x="y_true", y="y_pred", opacity=0.45, render_mode="svg",
                           labels={"y_true": "actual", "y_pred": "predicted"}, color_discrete_sequence=[ACCENT])
         mn, mx = predictions["y_true"].min(), predictions["y_true"].max()
         fig.add_trace(go.Scatter(x=[mn, mx], y=[mn, mx], mode="lines", line=dict(dash="dash", color=GOLD)))
@@ -677,7 +676,7 @@ with st.container(border=True):
     delta_vs_baseline = pred_price - baseline_pred
 
     with col_result:
-        delta_color = "var(--positive)" if delta_vs_baseline >= 0 else "var(--negative)"
+        delta_color = "var(-positive)" if delta_vs_baseline >= 0 else "var(-negative)"
         with st.container(border=True):
             st.markdown("<div class='dv-price-label'>Szacowana cena rynkowa</div>", unsafe_allow_html=True)
             st.markdown(f"<div class='dv-price-value'>${pred_price:,.0f}</div>", unsafe_allow_html=True)
@@ -711,7 +710,7 @@ st.markdown(
     <div class="dv-footer">
         <div class="dv-footer-brand">Analityka cen diamentów</div>
         <div class="dv-footer-meta">
-            Źródło danych: prawdziwy, publiczny zbiór diamonds (ggplot2/tidyverse)
+            Źródło danych: prawdziwy, publiczny zbiór diamonds (ggplot2/tidyverse) 
             <a href="https://github.com/tidyverse/ggplot2/blob/main/data-raw/diamonds.csv" target="_blank">Zobacz źródło danych</a>
             &nbsp;\u2022&nbsp; Streamlit + Plotly
         </div>
