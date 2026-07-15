@@ -2,7 +2,7 @@
   "n_rows_raw": 53940,
   "n_duplicates_removed": 146,
   "n_rows": 53794,
-  "n_cols_final": 13,
+  "n_cols_final": 10,
   "n_zero_dimension_rows": 19,
   "n_inconsistent_measurement_rows": 27,
   "n_overpriced": 1366,
