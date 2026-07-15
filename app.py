@@ -276,6 +276,7 @@ def style_fig(fig, title=None):
         font=dict(color=FONT_COLOR, family="Inter"),
         margin=dict(t=45 if title else 15, l=10, r=10, b=10),
         legend=dict(bgcolor=PLOT_BG),
+        template="plotly_white",
     )
     if title:
         layout_kwargs["title"] = title
@@ -650,13 +651,11 @@ with st.container(border=True):
     depth_mismatch = abs(depth - depth_calculated)
     log_carat = np.log1p(carat)
 
+    # Uwaga: model używa tylko 10 cech – x, y, z NIE są w feature_cols_model
     row = {c: 0 for c in feature_cols_model}
     row["carat"] = scale_val("carat", carat)
     row["depth"] = scale_val("depth", depth)
     row["table"] = scale_val("table", table)
-    row["x"] = scale_val("x", x)
-    row["y"] = scale_val("y", y)
-    row["z"] = scale_val("z", z)
     row["volume"] = scale_val("volume", volume)
     row["depth_calculated"] = scale_val("depth_calculated", depth_calculated)
     row["depth_mismatch"] = scale_val("depth_mismatch", depth_mismatch)
@@ -695,10 +694,17 @@ with st.container(border=True):
 
         st.write("")
         with st.expander("Cechy użyte do wyceny"):
+            # Wyświetlamy tylko cechy faktycznie używane przez model (bez x, y, z)
             display_feats = {
-                "carat": str(round(carat, 2)), "cut": cut, "color": color, "clarity": clarity,
-                "x (mm)": str(round(x, 2)), "y (mm)": str(round(y, 2)), "z (mm)": str(round(z, 2)),
-                "volume (mm3)": str(round(volume, 1)), "depth (%)": str(round(depth, 1)), "table (%)": str(round(table, 1)),
+                "carat": str(round(carat, 2)),
+                "cut": cut,
+                "color": color,
+                "clarity": clarity,
+                "volume (mm³)": str(round(volume, 1)),
+                "depth (%)": str(round(depth, 1)),
+                "table (%)": str(round(table, 1)),
+                "depth_calculated (%)": str(round(depth_calculated, 1)),
+                "depth_mismatch (p.p.)": str(round(depth_mismatch, 2)),
             }
             st.dataframe(pd.DataFrame(display_feats.items(), columns=["feature", "value"]),
                          use_container_width=True, hide_index=True)
